@@ -1,10 +1,10 @@
 import customtkinter as ctk
 from tkinter import ttk
 from tkinter import messagebox
-from crud.cliente_crud import ClienteCRUD
-from crud.pedido_crud import PedidoCRUD
-from crud.ingrediente_crud import IngredienteCRUD
-from crud.menu_crud import MenuCRUD
+from crud.cliente_crud import *
+from crud.pedido_crud import *
+from crud.ingrediente_crud import *
+from crud.menu_crud import *
 from sqlalchemy.orm import sessionmaker
 from database import get_session, engine, Base
 
@@ -111,6 +111,18 @@ class App(ctk.CTk):
 
     def eliminar_cliente(self, nombre):
         # Similar a agregar_cliente, pero elimina un registro
+        pass
+    
+    def actualizar_ingrediente(self):
+        pass
+    
+    def borrar_ingrediente(self):
+        pass
+    
+    def actualizar_menu(self):
+        pass
+    
+    def eliminar_menu(self):
         pass
 
     def agregar_ingrediente(self, nombre):

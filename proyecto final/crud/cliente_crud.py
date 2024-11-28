@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError
 from models import Cliente
 
 class ClienteCRUD:
@@ -30,8 +31,9 @@ class ClienteCRUD:
         """
         Actualiza los datos de un cliente existente.
         """
-        cliente = db.query(Cliente).filter(Cliente.id == cliente_id).first()
+        cliente = db.query(Cliente).filter(Cliente.email == cliente_id).first()
         if not cliente:
+            print(f"No se encontró el cliente con ID: {cliente_id}")
             return None  # Cliente no encontrado
 
         # Actualizar los campos
@@ -42,11 +44,11 @@ class ClienteCRUD:
         return cliente
 
     @staticmethod
-    def borrar_cliente(db: Session, cliente_id: int) -> bool:
+    def borrar_cliente(db: Session, email: str) -> bool:
         """
         Elimina un cliente por su ID.
         """
-        cliente = db.query(Cliente).filter(Cliente.id == cliente_id).first()
+        cliente = db.query(Cliente).filter(Cliente.email == email).first()
         if not cliente:
             return False  # Cliente no encontrado
 

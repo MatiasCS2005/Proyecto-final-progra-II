@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 # Configuración del motor y la sesión
-DATABASE_URL = 'sqlite:///mi_base_de_datos.db'
+DATABASE_URL = 'sqlite:///restaurante.db'
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -16,4 +16,7 @@ Base = declarative_base()  # Definimos Base aquí
 # Función para obtener la sesión de base de datos
 def get_session():
     db = SessionLocal()
-    return db
+    try:
+        yield db
+    finally:
+        db.close()

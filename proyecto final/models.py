@@ -13,7 +13,7 @@ class Cliente(Base):
     pedidos = relationship("Pedido", back_populates="cliente", cascade="all, delete")
 
     def __repr__(self):
-        return f"<Cliente(id={self.id}, nombre={self.nombre}, email={self.email})>"
+        return f"<Cliente(nombre={self.nombre}, email={self.email})>"
 
 # Modelo Pedido
 class Pedido(Base):
@@ -21,12 +21,11 @@ class Pedido(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     descripcion = Column(String, nullable=False)
-    cliente_id = Column(Integer, ForeignKey("clientes.id"), nullable=False)
-
+    cliente_email = Column(String, ForeignKey('clientes.email', onupdate="CASCADE"), nullable=False)
     cliente = relationship("Cliente", back_populates="pedidos")
 
     def __repr__(self):
-        return f"<Pedido(id={self.id}, descripcion={self.descripcion}, cliente_id={self.cliente_id})>"
+        return f"<Pedido(id={self.id}, descripcion={self.descripcion}, cliente_email={self.cliente_email})>"
 
 # Modelo Ingrediente
 class Ingrediente(Base):
@@ -69,3 +68,4 @@ class Menu(Base):
 
     def __repr__(self):
         return f"<Menu(id={self.id}, nombre={self.nombre}, descripcion={self.descripcion})>"
+    
